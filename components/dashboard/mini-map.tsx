@@ -39,26 +39,24 @@ export function DashboardMiniMap({ plots, className, center = [77.563, 29.998], 
     const initMap = () => {
       try {
         const style = {
-          version: 8 as any,
+          version: 8,
           sources: {
             "osm-standard": {
-              type: "raster" as any,
+              type: "raster",
               tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
               tileSize: 256,
               attribution: "© OpenStreetMap",
             },
           },
-          layers: [{ id: "osm", type: "raster" as any, source: "osm-standard" }],
-        };
+          layers: [{ id: "osm", type: "raster", source: "osm-standard" }],
+        } as any;
 
         const map = new maplibregl.Map({
           container: mapContainer.current!,
-          style: style as any,
+          style: style,
           center: center,
           zoom: zoom,
           attributionControl: false,
-          interactive: true,
-          preserveDrawingBuffer: true,
         });
 
         mapRef.current = map;

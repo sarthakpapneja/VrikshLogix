@@ -47,10 +47,10 @@ export default function PermitsPage() {
   }, []);
 
   const filtered = permits.filter(
-    (p) =>
+    (p: any) =>
       p.permit_no.toLowerCase().includes(query.toLowerCase()) ||
       p.linked_farmer?.toLowerCase().includes(query.toLowerCase()) ||
-      p.species.some((s) => s.toLowerCase().includes(query.toLowerCase()))
+      p.species.some((s: string) => s.toLowerCase().includes(query.toLowerCase()))
   );
 
   return (
@@ -75,9 +75,9 @@ export default function PermitsPage() {
         {[
           { label: "Total Permits", value: permits.length, emoji: "📄" },
           { label: "Verified", value: permits.filter((p) => p.status === "verified").length, emoji: "✅" },
-          { label: "Needs Review", value: permits.filter((p) => p.status === "extracted").length, emoji: "⚠️" },
-          { label: "Total Volume (CFT)", value: permits.reduce((s, p) => s + p.volume_cft, 0).toFixed(0), emoji: "📦" },
-        ].map((s) => (
+          { label: "Needs Review", value: permits.filter((p: any) => p.status === "extracted").length, emoji: "⚠️" },
+          { label: "Total Volume (CFT)", value: permits.reduce((s: number, p: any) => s + p.volume_cft, 0).toFixed(0), emoji: "📦" },
+        ].map((s: any) => (
           <Card key={s.label}>
             <CardContent className="p-4">
               <p className="text-2xl mb-1">{s.emoji}</p>

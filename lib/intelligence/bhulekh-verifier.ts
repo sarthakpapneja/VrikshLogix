@@ -56,3 +56,6 @@ export async function verifyLandRecord(khasra: string, tehsil: string): Promise<
 export function isValidSaharanpurTehsil(tehsil: string): boolean {
   return SAHARANPUR_TEHSILS.includes(tehsil);
 }
+
+// Alias for API route compatibility
+export { verifyLandRecord as verifyPlotAgainstBhulekh };

@@ -137,7 +137,7 @@ export async function getShipmentsAction(): Promise<ActionResponse> {
 
 export type ActionResponse = {
   success: boolean;
-  message: string;
+  message?: string;
   data?: any;
   error?: string;
 };

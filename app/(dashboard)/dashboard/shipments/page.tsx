@@ -65,9 +65,14 @@ export default function ShipmentsPage() {
              <div className="flex items-center gap-1.5 text-forest-900">
                 <Ship className="h-3 w-3" /> ACTIVE: {shipments.length}
              </div>
-             <div className="flex items-center gap-1.5 text-emerald-600">
-                <CheckCircle2 className="h-3 w-3" /> DDS_SYNCED: {shipments.filter(s=>s.status==='submitted').length}
-             </div>
+             {[
+               { label: "Active Hauls", value: shipments.filter((s: any) => s.status === "in_transit").length, emoji: "🚛" },
+               { label: "High Risk", value: shipments.filter((s: any) => s.risk_rating === "high").length, emoji: "🚩" },
+             ].map((hs: any) => (
+               <div key={hs.label} className="flex items-center gap-1.5 text-emerald-600">
+                 {hs.emoji} {hs.label.toUpperCase()}: {hs.value}
+               </div>
+             ))}
           </div>
           <Link href="/dashboard/shipments/new">
             <Button className="h-9 bg-forest-900 text-khaki-100 px-6 text-xs uppercase tracking-widest font-bold rounded-none hover:bg-forest-800 transition-all">
@@ -174,7 +179,7 @@ export default function ShipmentsPage() {
                                  <span className="font-mono">WT:</span> {shipment.volume_kg.toLocaleString()} KG
                               </div>
                               <div className="flex gap-1">
-                                 {shipment.hs_codes.map(hs => (
+                                 {shipment.hs_codes.map((hs: string) => (
                                    <span key={hs} className="px-1.5 py-0.5 border border-border bg-khaki-100 text-[9px] font-mono font-bold leading-none">{hs}</span>
                                  ))}
                               </div>

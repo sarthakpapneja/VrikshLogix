@@ -43,10 +43,10 @@ export default function FarmersPage() {
   }, []);
 
   const filtered = farmers.filter(
-    (f) =>
-      f.name.toLowerCase().includes(query.toLowerCase()) ||
-      f.village.toLowerCase().includes(query.toLowerCase()) ||
-      f.plots.some((p) => p.khasra_no.includes(query))
+    (p: any) =>
+      p.name.toLowerCase().includes(query.toLowerCase()) ||
+      p.village.toLowerCase().includes(query.toLowerCase()) ||
+      p.khasra_no.toLowerCase().includes(query.toLowerCase())
   );
 
   return (
@@ -62,9 +62,9 @@ export default function FarmersPage() {
              <div className="flex items-center gap-1.5 text-forest-900">
                 <Database className="h-3 w-3" /> REGISTERED: {farmers.length}
              </div>
-             <div className="flex items-center gap-1.5 text-emerald-600">
-                <CheckCircle2 className="h-3 w-3" /> VERIFIED: {farmers.reduce((s,f) => s + f.plots.filter(p=>p.bhulekh_verified_at).length, 0)} PLOTS
-             </div>
+              <div className="flex items-center gap-1.5 text-emerald-600">
+                 <CheckCircle2 className="h-3 w-3" /> VERIFIED: {farmers.reduce((s: number, f: any) => s + (f.plots?.filter((p: any) => p.bhulekh_verified_at).length ?? 0), 0)} PLOTS
+              </div>
           </div>
           <Link href="/dashboard/farmers/new">
             <Button className="h-9 bg-forest-900 text-khaki-100 px-6 text-xs uppercase tracking-widest font-bold rounded-none hover:bg-forest-800 transition-all">
@@ -180,7 +180,7 @@ export default function FarmersPage() {
                           </td>
                           <td className="px-6 py-5">
                              <div className="flex items-center gap-2">
-                                <p className="font-mono text-xs font-bold">{(farmer.plots?.reduce((s: any, p: any) => s + (p.area_ha ?? 0), 0) ?? 0).toFixed(2)}</p>
+                                <p className="font-mono text-xs font-bold">{(farmer.plots?.reduce((s: number, p: any) => s + (p.area_ha ?? 0), 0) ?? 0).toFixed(2)}</p>
                                 <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">Hectares</span>
                              </div>
                           </td>

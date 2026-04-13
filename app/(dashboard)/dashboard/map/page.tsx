@@ -100,7 +100,6 @@ export default function MapPage() {
           center: [77.563, 29.998] as [number, number],
           zoom: 11.5,
           attributionControl: false,
-          preserveDrawingBuffer: true,
         });
 
         mapRef.current = map;

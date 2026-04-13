@@ -20,7 +20,7 @@ export async function GET(request: Request) {
     // Simulate Bhulekh portal response time
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    const result = verifyPlotAgainstBhulekh(khasra);
+    const result = await verifyPlotAgainstBhulekh(khasra, "");
 
     return NextResponse.json({
       success: true,

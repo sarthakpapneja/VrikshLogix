@@ -59,3 +59,5 @@ export function isEUDRCompliant(result: SatelliteAuditResult): boolean {
   }
   return true;
 }
+// Alias for API route compatibility
+export { auditPlotSatellite as runSatelliteAudit };
