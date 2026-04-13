@@ -1,26 +1,128 @@
 @import "tailwindcss";
+@import "maplibre-gl/dist/maplibre-gl.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular;
+
+  /* Tactical Forest Palette */
+  --color-forest-950: #0a140d;
+  --color-forest-900: #1b3022;
+  --color-forest-800: #2a4733;
+  --color-forest-700: #3a5f45;
+  --color-forest-600: #4b7858;
+  --color-forest-500: #5d926d;
+  
+  --color-khaki-100: #fdfaf6;
+  --color-khaki-200: #f4f0e6;
+  --color-khaki-300: #ede7d8;
+  --color-khaki-400: #e2d9c1;
+  --color-khaki-500: #d4c5a3;
+  --color-khaki-600: #a8957c;
+
+  --color-bark-500: #7c5c42;
+  --color-bark-600: #5f4432;
+
+  /* Operational Tokens */
+  --color-background: #fdfaf6;
+  --color-foreground: #1b3022;
+  
+  --color-card: #ffffff;
+  --color-card-foreground: #1b3022;
+  
+  --color-primary: #1b3022;
+  --color-primary-foreground: #fdfaf6;
+  
+  --color-secondary: #ede7d8;
+  --color-secondary-foreground: #1b3022;
+  
+  --color-muted: #f4f0e6;
+  --color-muted-foreground: #716f6b;
+  
+  --color-accent: #a8957c;
+  --color-accent-foreground: #ffffff;
+  
+  --color-destructive: #8b3a3a;
+  --color-destructive-foreground: #ffffff;
+  
+  --color-border: #dcdad2;
+  --color-input: #dcdad2;
+  --color-ring: #1b3022;
+
+  --radius: 0.125rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  * {
+    @apply border-border;
+  }
 
-@media (prefers-color-scheme: dark) {
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+    --color-background: #0d120f;
+    --color-foreground: #f0f4f1;
+    --color-card: #151d19;
+    --color-card-foreground: #f0f4f1;
+    --color-primary: #5d926d;
+    --color-primary-foreground: #0d120f;
+    --color-secondary: #1a241e;
+    --color-border: #242e28;
+    --color-input: #242e28;
+    --color-muted: #1a221d;
+    --color-muted-foreground: #8aa193;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .tactical-border {
+    @apply border border-border shadow-[2px_2px_0px_0px_rgba(220,218,210,1)];
+  }
+  
+  .terminal-panel {
+    @apply bg-khaki-100 border border-border p-4 font-mono text-sm uppercase tracking-tight;
+  }
+
+  .gis-panel {
+    @apply bg-white/90 border border-border/50 shadow-sm backdrop-blur-none;
+  }
+
+  .data-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-border;
+  }
+
+  .data-cell {
+    @apply p-4 border-b border-r border-border bg-white;
+  }
 }
+
+/* Custom Tactical Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-forest-900;
+}
+
+/* Operational Labels */
+.op-label {
+  @apply text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1 block;
+}
+
+/* PostGIS / Map Customizations */
+
+.maplibregl-ctrl-group {
+  @apply !border-border !rounded-none !shadow-none;
+}
+
